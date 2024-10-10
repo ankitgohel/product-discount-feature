@@ -1,0 +1,16 @@
+<odoo>
+   <template id="product_price_discounted" inherit_id="website_sale.product_price" name="Product Price with Discount">
+        <xpath expr="//span[@class='oe_price']" position="replace">
+            <span style="white-space: nowrap;"
+                  t-out="product['discounted_price']"
+                  t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+        </xpath>
+        <xpath expr="//span[@itemprop='listPrice']" position="replace">
+            <span t-attf-class="text-danger ms-1 h5 {{'' if product.discount_percentage > 0 else 'd-none'}}"
+                  style="text-decoration: line-through; white-space: nowrap;"
+                  t-esc="product['list_price']"
+                  t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"
+            />
+        </xpath>
+    </template>
+</odoo>
